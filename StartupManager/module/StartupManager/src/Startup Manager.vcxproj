@@ -1,0 +1,241 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>StartupManager</ProjectName>
+    <ProjectGuid>{0AE47938-3AB6-4296-BF4D-D20011F046C4}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v141</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v141</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(VCTargetsPath)Microsoft.CPP.UpgradeFromVC71.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(VCTargetsPath)Microsoft.CPP.UpgradeFromVC71.props" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.30319.1</_ProjectFileVersion>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(SolutionDir)bin\$(Configuration)\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(SolutionDir)..\Temp\$(SolutionName)\$(ProjectName)\$(Configuration)\</IntDir>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</GenerateManifest>
+    <EmbedManifest Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</EmbedManifest>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(SolutionDir)bin\$(Configuration)\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(SolutionDir)..\Temp\$(SolutionName)\$(ProjectName)\$(Configuration)\</IntDir>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</GenerateManifest>
+    <EmbedManifest Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</EmbedManifest>
+    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" />
+    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Release|x64'">AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Release|x64'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Release|x64'" />
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_DEPRECATE;PORTABLE;</PreprocessorDefinitions>
+      <MinimalRebuild>true</MinimalRebuild>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level4</WarningLevel>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+      <DisableSpecificWarnings>4290;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <AdditionalIncludeDirectories>$(SolutionDir)thirdparty\vld-2.7.0\src</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>OleAut32.lib;User32.lib;Gdi32.lib;ole32.lib;Comdlg32.lib;Comctl32.lib;shell32.lib;Advapi32.lib;Version.lib;HtmlHelp.lib;Wininet.lib</AdditionalDependencies>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+      <RandomizedBaseAddress>true</RandomizedBaseAddress>
+      <DataExecutionPrevention>
+      </DataExecutionPrevention>
+      <TargetMachine>MachineX64</TargetMachine>
+      <AdditionalLibraryDirectories>$(SolutionDir)lib\$(Configuration)\</AdditionalLibraryDirectories>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_DEPRECATE;PORTABLE;</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level4</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <DisableSpecificWarnings>4290;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+      <AdditionalIncludeDirectories>$(SolutionDir)thirdparty\vld-2.7.0\src</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>OleAut32.lib;User32.lib;Gdi32.lib;ole32.lib;Comdlg32.lib;Comctl32.lib;shell32.lib;Advapi32.lib;Version.lib;HtmlHelp.lib;Wininet.lib</AdditionalDependencies>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <RandomizedBaseAddress>true</RandomizedBaseAddress>
+      <DataExecutionPrevention>
+      </DataExecutionPrevention>
+      <TargetMachine>MachineX64</TargetMachine>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="AboutDlg.cpp" />
+    <ClCompile Include="AddDlg.cpp" />
+    <ClCompile Include="BrowseEdit.cpp" />
+    <ClCompile Include="BtCoreExporter.cpp" />
+    <ClCompile Include="BtOrderDlg.cpp" />
+    <ClCompile Include="CImage.cpp" />
+    <ClCompile Include="DropDlg.cpp" />
+    <ClCompile Include="FrameApp.cpp" />
+    <ClCompile Include="HotImage.cpp" />
+    <ClCompile Include="HyperLink.cpp" />
+    <ClCompile Include="LeftView.cpp" />
+    <ClCompile Include="ListView.cpp" />
+    <ClCompile Include="LogDlg.cpp" />
+    <ClCompile Include="Logoff.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="MainFrm.cpp" />
+    <ClCompile Include="MainView.cpp" />
+    <ClCompile Include="PropertiesDlg.cpp" />
+    <ClCompile Include="RenameDlg.cpp" />
+    <ClCompile Include="RightView.cpp" />
+    <ClCompile Include="SettingsDlg.cpp" />
+    <ClCompile Include="TitleTip.cpp" />
+    <ClCompile Include="ToolTip.cpp" />
+    <ClCompile Include="TreeCtrl.cpp" />
+    <ClCompile Include="UpdateDlg.cpp" />
+    <ClCompile Include="boot\BtBHO.cpp" />
+    <ClCompile Include="boot\BtCore.cpp" />
+    <ClCompile Include="boot\BtFolder.cpp" />
+    <ClCompile Include="boot\BtReg.cpp" />
+    <ClCompile Include="boot\BtSection.cpp" />
+    <ClCompile Include="boot\BtWinini.cpp" />
+    <ClCompile Include="boot\BtWinLogon.cpp" />
+    <ClCompile Include="boot\cLibraryInfo.cpp" />
+    <ClCompile Include="boot\File.cpp" />
+    <ClCompile Include="boot\GList.cpp" />
+    <ClCompile Include="boot\RegKey.cpp" />
+    <ClCompile Include="boot\ShortCut.cpp" />
+    <ClCompile Include="boot\WinTools.cpp" />
+    <ClCompile Include="types\tstring.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="AboutDlg.h" />
+    <ClInclude Include="AddDlg.h" />
+    <ClInclude Include="BrowseEdit.h" />
+    <ClInclude Include="BtCoreExporter.h" />
+    <ClInclude Include="BtOrderDlg.h" />
+    <ClInclude Include="CImage.h" />
+    <ClInclude Include="DropDlg.h" />
+    <ClInclude Include="FrameApp.h" />
+    <ClInclude Include="HotImage.h" />
+    <ClInclude Include="HyperLink.h" />
+    <ClInclude Include="LeftView.h" />
+    <ClInclude Include="ListView.h" />
+    <ClInclude Include="LogDlg.h" />
+    <ClInclude Include="Logoff.h" />
+    <ClInclude Include="MainFrm.h" />
+    <ClInclude Include="MainView.h" />
+    <ClInclude Include="PropertiesDlg.h" />
+    <ClInclude Include="RenameDlg.h" />
+    <ClInclude Include="resource.h" />
+    <ClInclude Include="RightView.h" />
+    <ClInclude Include="SettingsDlg.h" />
+    <ClInclude Include="TitleTip.h" />
+    <ClInclude Include="ToolTip.h" />
+    <ClInclude Include="TreeCtrl.h" />
+    <ClInclude Include="UpdateDlg.h" />
+    <ClInclude Include="boot\BtBHO.h" />
+    <ClInclude Include="boot\BtCore.h" />
+    <ClInclude Include="boot\BtFolder.h" />
+    <ClInclude Include="boot\BtReg.h" />
+    <ClInclude Include="boot\BtSection.h" />
+    <ClInclude Include="boot\BtWinini.h" />
+    <ClInclude Include="boot\BtWinLogon.h" />
+    <ClInclude Include="boot\cLibraryInfo.h" />
+    <ClInclude Include="boot\File.h" />
+    <ClInclude Include="boot\GList.h" />
+    <ClInclude Include="boot\RegKey.h" />
+    <ClInclude Include="boot\ShortCut.h" />
+    <ClInclude Include="boot\WinTools.h" />
+    <ClInclude Include="types\tfstream.h" />
+    <ClInclude Include="types\tstring.h" />
+    <ClInclude Include="types\utf16fstream.h" />
+    <ClInclude Include="..\Win32++\Default_Resource.h" />
+    <ClInclude Include="..\Win32++\Dialog.h" />
+    <ClInclude Include="..\Win32++\Frame.h" />
+    <ClInclude Include="..\Win32++\GDI.h" />
+    <ClInclude Include="..\Win32++\PropertySheet.h" />
+    <ClInclude Include="..\Win32++\Rebar.h" />
+    <ClInclude Include="..\Win32++\Splitter.h" />
+    <ClInclude Include="..\Win32++\Statusbar.h" />
+    <ClInclude Include="..\Win32++\Toolbar.h" />
+    <ClInclude Include="..\Win32++\WinCore.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="res\about.ico" />
+    <None Include="res\backgrnd.bmp" />
+    <None Include="res\delete.ico" />
+    <None Include="res\downarrow.bmp" />
+    <None Include="res\help.ico" />
+    <None Include="res\hybernate.ico" />
+    <None Include="res\invalid.ico" />
+    <None Include="res\log.ico" />
+    <None Include="res\logoff.ico" />
+    <None Include="res\new.ico" />
+    <None Include="res\project-support.jpg" />
+    <None Include="res\properties.ico" />
+    <None Include="res\refresh.ico" />
+    <None Include="res\rename.ico" />
+    <None Include="res\restart.ico" />
+    <None Include="res\run.ico" />
+    <None Include="res\settings.ico" />
+    <None Include="res\shutdown.ico" />
+    <None Include="res\st-m_logo.gif" />
+    <None Include="res\Startup_Manager.ico" />
+    <None Include="res\Toolbar.bmp" />
+    <None Include="res\toolbar_d.bmp" />
+    <None Include="res\toolbar_h.bmp" />
+    <None Include="res\toolbar_n.bmp" />
+    <None Include="res\treeview.bmp" />
+    <None Include="res\uparrow.bmp" />
+    <None Include="res\update.ico" />
+    <None Include="res\website.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="rsrc.rc" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

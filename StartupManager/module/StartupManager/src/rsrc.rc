@@ -1,0 +1,529 @@
+/*
+ * this file is part of Startup Manager
+ * Copyright (C) 2004-2008 Glenn Van Loon, glenn@startupmanager.org
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+ */
+
+#include <winuser.h>   //WS_EX_, WS_, DS_, ... definitions
+#include <winver.h>    //LVS_, BS_, SS_, ... (control) definitions
+#include <commctrl.h>  //VFT_APP is defined here
+
+#include "resource.h"
+
+
+
+// images
+IDW_MAIN             BITMAP      DISCARDABLE      "res\\Toolbar.bmp"
+IDI_HEADER           BINARY      DISCARDABLE      "res\\st-m_logo.gif"
+IDI_TOOLBAR          BITMAP      DISCARDABLE      "res\\toolbar_n.bmp"
+IDI_TOOLBAR_HOT      BITMAP      DISCARDABLE      "res\\toolbar_h.bmp"
+IDI_TOOLBAR_DIS      BITMAP      DISCARDABLE      "res\\toolbar_d.bmp"
+IDI_TREE             BITMAP      DISCARDABLE      "res\\treeview.bmp"
+IDW_MAIN             ICON        DISCARDABLE      "res\\Startup_Manager.ico"
+IDI_INVALID          ICON        DISCARDABLE      "res\\invalid.ico"
+IDI_ABOUT			 ICON		 DISCARDABLE	  "res\\about.ico"
+IDI_DELETE			 ICON		 DISCARDABLE	  "res\\delete.ico"
+IDI_HELP			 ICON		 DISCARDABLE	  "res\\help.ico"
+IDI_HYBERNATE		 ICON		 DISCARDABLE	  "res\\hybernate.ico"
+IDI_LOGOFF			 ICON		 DISCARDABLE	  "res\\logoff.ico"
+IDI_NEW				 ICON		 DISCARDABLE	  "res\\new.ico"
+IDI_PROPERTIES		 ICON		 DISCARDABLE	  "res\\properties.ico"
+IDI_REFRESH			 ICON		 DISCARDABLE	  "res\\refresh.ico"
+IDI_RENAME			 ICON		 DISCARDABLE	  "res\\rename.ico"
+IDI_RESTART			 ICON		 DISCARDABLE	  "res\\restart.ico"
+IDI_RUN				 ICON		 DISCARDABLE	  "res\\run.ico"
+IDI_SHUTDOWN		 ICON		 DISCARDABLE	  "res\\shutdown.ico"
+IDI_UPDATE			 ICON		 DISCARDABLE	  "res\\update.ico"
+IDI_DONATE           BINARY      DISCARDABLE      "res\\project-support.jpg"
+IDI_UPARROW          BITMAP      DISCARDABLE      "res\\uparrow.bmp"
+IDI_DOWNARROW        BITMAP      DISCARDABLE      "res\\downarrow.bmp"
+
+//main menu
+IDW_MAIN MENU DISCARDABLE
+BEGIN
+    POPUP "&File"
+    BEGIN
+        MENUITEM "&Add\tCtrl+A",             IDM_FILE_ADD
+        POPUP "&Boot Order"
+        BEGIN
+            MENUITEM "&New",                 IDM_FILE_BTNEW
+            MENUITEM "&Open",                IDM_FILE_BTOPEN
+        END
+		MENUITEM SEPARATOR
+        MENUITEM "&View log",                IDM_FILE_LOG
+		POPUP "&Export As..."
+		BEGIN
+			MENUITEM "Html (&Horizontal)",	 IDM_FILE_XPTHHTML
+			MENUITEM "Html (&Vertical)",	 IDM_FILE_XPTVHTML
+			MENUITEM "&Xml",				 IDM_FILE_XPTXML
+		END
+        MENUITEM SEPARATOR
+        MENUITEM "MS&Config\tAlt+C",         IDM_FILE_MSCONFIG
+        MENUITEM "&RegEdit\tAlt+E",          IDM_FILE_REGEDIT
+        MENUITEM SEPARATOR
+        MENUITEM "E&xit\tAlt+F4",            IDM_FILE_EXIT
+    END
+
+    POPUP "&Edit"
+    BEGIN
+        MENUITEM "&Delete\tCtrl+D",          IDM_EDIT_DELETE,             GRAYED
+        MENUITEM "Re&name\tCtrl+N",          IDM_EDIT_RENAME,             GRAYED
+        MENUITEM SEPARATOR
+        MENUITEM "&Run\tCtrl+R"				 IDM_EDIT_RUN,				  GRAYED
+		MENUITEM "&Properties\tCtrl+P",      IDM_EDIT_PROPERTIES,         GRAYED
+    END
+
+    POPUP "&View"
+    BEGIN
+        MENUITEM "&Toolbar\tCtrl+T",         IDW_VIEW_TOOLBAR,           CHECKED
+        MENUITEM "&Statusbar\tCtrl+S",       IDW_VIEW_STATUSBAR,         CHECKED
+        MENUITEM SEPARATOR
+        MENUITEM "Large &Icons",             IDM_VIEW_ICON
+        MENUITEM "S&mall Icons",             IDM_VIEW_SMALL
+        MENUITEM "&List",                    IDM_VIEW_LIST
+        MENUITEM "&Details",                 IDM_VIEW_REPORT
+        MENUITEM SEPARATOR
+        MENUITEM "Re&fresh\tCtrl+F",         IDM_VIEW_REFRESH
+    END
+
+    POPUP "&System"
+    BEGIN
+    	MENUITEM "&Settings",                IDM_SYSTEM_SETTINGS
+    	MENUITEM SEPARATOR
+        MENUITEM "Shut&Down",                IDM_SYSTEM_SHUTDOWN
+        MENUITEM "&PowerOff",                IDM_SYSTEM_POWEROFF
+        MENUITEM "Re&boot",                  IDM_SYSTEM_REBOOT
+        MENUITEM SEPARATOR
+        MENUITEM "Log&Off",                  IDM_SYSTEM_LOGOFF
+    END
+
+    POPUP "&Help"
+    BEGIN
+        MENUITEM "&Contents\tF1",            IDM_HELP_CONTENTS
+        MENUITEM SEPARATOR
+        MENUITEM "&Website",                 IDM_HELP_WEBSITE
+        MENUITEM "&Support!",                IDM_HELP_SUPPORT
+		MENUITEM "Check for &Update",        IDM_HELP_UPDATE
+        MENUITEM SEPARATOR
+        MENUITEM "&About...",                IDM_HELP_ABOUT
+    END
+END
+
+//menu for toolbar add button
+IDM_FILE_ADD MENU DISCARDABLE
+BEGIN
+    POPUP "TBMenu_Add"
+    BEGIN
+        MENUITEM "&Add item",                IDM_FILE_ADD
+        MENUITEM "Boot &order file",         IDM_FILE_BTNEW
+    END
+END
+
+IDD_ADD DIALOG DISCARDABLE 0, 0, 210, 103
+STYLE DS_MODALFRAME | DS_CENTER | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Add an item to the startup sections"
+FONT 8, "Verdana"
+BEGIN
+    LTEXT           "Sections:", IDW_STATIC, 5, 6, 75, 10
+    CONTROL         "", IDC_SECTION, "ComboBox", 0x50210003, 40, 5, 165, 75, 0x00000000
+	LTEXT           "Name:", IDC_STATICNAME, 5, 26, 30, 10
+    CONTROL         "", IDC_NAME, "Edit", 0x50810080, 40, 25, 165, 12, 0x00000000
+	LTEXT           "Path:", IDW_STATIC, 5, 46, 30, 10
+    CONTROL         "", IDC_PATH, "Edit", 0x50810080, 40, 45, 165, 12, 0x00000000
+	LTEXT           "Flags:", IDW_STATIC, 5, 66, 30, 10
+    CONTROL         "", IDC_FLAGS, "Edit", 0x50810080, 40, 65, 165, 12, 0x00000000
+    CTEXT           "__________________________________________________________", IDW_STATIC, 0, 78, 210, 10, WS_DISABLED
+    PUSHBUTTON      "&OK", IDOK, 124, 88, 40, 14
+    PUSHBUTTON      "&Cancel", IDCANCEL, 167, 88, 40, 14
+END
+
+IDD_NEWBAT DIALOG DISCARDABLE 0, 0, 210, 55
+STYLE DS_MODALFRAME | DS_CENTER | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Create new boot order file"
+FONT 8, "Verdana"
+BEGIN
+    LTEXT           "Name:", IDW_STATIC, 5, 5, 30, 10
+    CONTROL         "", IDC_NAME, "Edit", 0x50810080, 40, 5, 165, 12, 0x00000000
+    LTEXT           "Sections:", IDW_STATIC, 5, 20, 30, 10
+    CONTROL         "", IDC_SECTION, "ComboBox", 0x50210003, 40, 20, 165, 75, 0x00000000
+    PUSHBUTTON      "&OK", IDOK, 124, 39, 40, 14
+    PUSHBUTTON      "&Cancel", IDCANCEL, 167, 39, 40, 14
+END
+
+IDD_ADDTOBATCH DIALOG DISCARDABLE 0, 0, 210, 63
+STYLE DS_MODALFRAME | DS_CENTER | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Add item to boot order file"
+FONT 8, "Verdana"
+BEGIN
+	LTEXT			"Path:", IDW_STATIC, 5, 6, 75, 10
+	CONTROL			"", IDC_PATH, "Edit", 0x50810080, 40, 5, 165, 12, 0x00000000
+	LTEXT			"Flags:", IDW_STATIC, 5, 26, 75, 10
+	CONTROL			"", IDC_FLAGS, "Edit", 0x50810080, 40, 25, 165, 12, 0x00000000
+    CTEXT           "__________________________________________________________", IDW_STATIC, 0, 38, 210, 10, WS_DISABLED
+    PUSHBUTTON      "&OK", IDOK, 124, 48, 40, 14
+    PUSHBUTTON      "&Cancel", IDCANCEL, 167, 48, 40, 14
+END
+
+IDD_ORDER DIALOGEX DISCARDABLE 0, 0, 270, 135
+STYLE DS_MODALFRAME | DS_CENTER | WS_POPUP | WS_CAPTION | WS_SYSMENU
+EXSTYLE WS_EX_TOOLWINDOW | WS_EX_ACCEPTFILES
+CAPTION "Boot Order Tool"
+FONT 8, "Verdana"
+BEGIN
+    GROUPBOX        "Move", IDW_STATIC, 234, 29, 30, 36
+    PUSHBUTTON      "&Up", IDUP, 237, 38, 25, 12, WS_DISABLED
+    PUSHBUTTON      "Do&wn", IDDOWN, 237, 51, 25, 12, WS_DISABLED
+    GROUPBOX        "Item", IDW_STATIC, 234, 70, 30, 36
+    PUSHBUTTON      "&Add", IDADD, 237, 79, 25, 12, WS_DISABLED
+    PUSHBUTTON      "&Delete", IDDELETE, 237, 92, 25, 12, WS_DISABLED
+    PUSHBUTTON      "&New", IDNEW, 6, 113, 25, 12
+    PUSHBUTTON      "O&pen", IDOPEN, 32, 113, 30, 12
+    CONTROL         "/&wait", IDC_CHWAIT, "Button", BS_AUTOCHECKBOX | WS_TABSTOP | WS_DISABLED, 75, 113, 30, 12
+    LTEXT           "This tool creates a batch-file (*.bat) that executes the items you add in this list in the order you specify them.", IDW_STATIC, 5, 5, 260, 20
+    PUSHBUTTON      "&OK", IDOK, 184, 119, 40, 14, WS_DISABLED
+    PUSHBUTTON      "&Cancel", IDCANCEL, 227, 119, 40, 14
+END
+
+IDD_RENAME DIALOG DISCARDABLE 0, 0, 140, 25
+STYLE DS_MODALFRAME | DS_CENTER | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Rename Selected item"
+FONT 8, "Verdana"
+BEGIN
+    LTEXT           "New name", IDW_STATIC, 5, 1, 75, 10
+    CONTROL         "", IDC_NEWNAME, "Edit", 0x50810080, 10, 11, 100, 12, 0x00000000
+    PUSHBUTTON      "&OK", IDOK, 115, 11, 20, 12
+END
+
+IDD_LOG DIALOG DISCARDABLE 0, 0, 370, 150
+STYLE DS_MODALFRAME | DS_CENTER | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "LogBook"
+FONT 8, "Verdana"
+BEGIN
+    CONTROL         "", IDC_NUMBER, "Static", SS_RIGHT, 315, 132, 50, 12
+    PUSHBUTTON      "&Clear log", IDCLEAR, 5, 130, 35, 14
+END
+
+IDD_ABOUT DIALOG DISCARDABLE 0, 0, 200, 152
+STYLE DS_MODALFRAME | DS_CENTER | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "About Startup Manager..."
+FONT 8, "Verdana"
+BEGIN
+    CONTROL         "Here", IDC_HOMEPAGE, "Static", SS_LEFT | SS_NOTIFY, 80, 55, 15, 10
+    CONTROL         "Project License", IDC_LICENSE, "Static", SS_LEFT | SS_NOTIFY, 135, 55, 50, 10
+    LTEXT           "Startup Manager (version 2.4.2) is an application to manage the programs that automatically startup.", IDW_STATIC, 15, 30, 170, 20
+    LTEXT           "Project homepage:", IDW_STATIC, 15, 55, 65, 14
+    LTEXT           "Copyright \xA9 2004-2008, Glenn Van Loon", IDW_STATIC, 15, 70, 135, 14
+    LTEXT           "Glenn Van Loon", IDW_STATIC, 17, 95, 70, 10
+    LTEXT           "David Nash", IDW_STATIC, 17, 105, 70, 10
+    CONTROL         "Win32++", IDC_WIN32XX, "Static", SS_LEFT | SS_NOTIFY, 60, 105, 31, 10
+	LTEXT           "George French", IDW_STATIC, 107, 93, 70, 14
+    LTEXT           "Niels Willemsen", IDW_STATIC, 107, 112, 70, 14
+    CTEXT           "__________________________________________________________", IDW_STATIC, 0, 120, 200, 10, WS_DISABLED
+    GROUPBOX        "Development", IDW_STATIC, 15, 85, 80, 37
+    GROUPBOX        "Web design", IDW_STATIC, 105, 85, 80, 18
+    GROUPBOX        "Help/Beta tester", IDW_STATIC, 105, 104, 80, 18
+	CONTROL			"", IDC_DONATE, "Static", SS_NOTIFY, 5, 130, 52, 21
+    PUSHBUTTON      "&OK", IDOK, 155, 133, 40, 14
+END
+
+IDD_PROPERTIES DIALOG DISCARDABLE 0, 0, 230, 215
+STYLE DS_MODALFRAME | DS_CENTER | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Properties"
+FONT 8, "Verdana"
+BEGIN
+    CONTROL         "", IDC_FILETAB, "SysTabControl32", 0x50010000, 2, 3, 226, 194, 0x00000000
+    CONTROL         "Search Google", IDC_GOOGLE, "Static", SS_CENTER | SS_NOTIFY, 10, 170, 25, 17
+    CONTROL         "", IDC_FILENAME, "Static", SS_LEFT | SS_NOTIFY, 65, 22, 160, 10
+	CONTROL         "", IDC_COMPANY, "Edit", ES_AUTOHSCROLL | ES_READONLY, 65, 32, 160, 10
+    CONTROL         "", IDC_COPYRIGHT, "Edit", ES_AUTOHSCROLL | ES_READONLY, 65, 42, 160, 10
+    CONTROL         "", IDC_FVERSION, "Edit", ES_AUTOHSCROLL | ES_READONLY, 65, 52, 160, 10
+    CONTROL         "", IDC_INAME, "Edit", ES_AUTOHSCROLL | ES_READONLY, 65, 62, 160, 10
+    CONTROL         "", IDC_ONAME, "Edit", ES_AUTOHSCROLL | ES_READONLY, 65, 72, 160, 10
+    CONTROL         "", IDC_PNAME, "Edit", ES_AUTOHSCROLL | ES_READONLY, 65, 82, 160, 10
+    CONTROL         "", IDC_PVERSION, "Edit", ES_AUTOHSCROLL | ES_READONLY, 65, 92, 160, 10
+    CONTROL         "", IDC_DVERSION, "Edit", ES_AUTOHSCROLL | ES_READONLY, 65, 102, 160, 10
+    CONTROL         "", IDC_FILEOS, "Edit", ES_AUTOHSCROLL | ES_READONLY, 65, 112, 160, 10
+    CONTROL         "", IDC_FTYPE, "Edit", ES_AUTOHSCROLL | ES_READONLY, 65, 122, 160, 10
+    LTEXT           "Filename:", IDW_STATIC, 5, 22, 40, 12
+    LTEXT           "Company:", IDW_STATIC, 5, 32, 40, 12
+    LTEXT           "Copyright:", IDW_STATIC, 5, 42, 40, 12
+    LTEXT           "File Version:", IDW_STATIC, 5, 52, 55, 12
+    LTEXT           "Internal Name:", IDW_STATIC, 5, 62, 55, 12
+    LTEXT           "Original Name:", IDW_STATIC, 5, 72, 55, 12
+    LTEXT           "Product Name:", IDW_STATIC, 5, 82, 55, 12
+    LTEXT           "Product Version:", IDW_STATIC, 5, 92, 55, 12
+    LTEXT           "Dll version:", IDW_STATIC, 5, 102, 40, 12
+    LTEXT           "File OS:", IDW_STATIC, 5, 112, 40, 12
+    LTEXT           "Filetype:", IDW_STATIC, 5, 122, 40, 12
+    LTEXT           "Description:", IDW_STATIC, 5, 140, 40, 12
+    CONTROL         "", IDC_DESCRIPTION, "Edit", 0x50A10804, 65, 140, 160, 49, 0x00000000
+    PUSHBUTTON      "&OK", IDOK, 187, 199, 40, 14
+END
+
+IDD_DRAGDROP DIALOG DISCARDABLE 0, 0, 200, 100
+STYLE DS_MODALFRAME | DS_CENTER | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Accept and add dropped file"
+FONT 8, "Verdana"
+BEGIN
+    CONTROL         "", IDC_SHOWICON, "Static", SS_ICON | SS_SUNKEN | SS_CENTERIMAGE, 5, 5, 30, 30
+    CONTROL         "", IDC_TEXT, "Static", SS_LEFT, 45, 8, 150, 25
+    CONTROL         "", IDC_SECTION, "ComboBox", 0x50210003, 15, 57, 165, 75, 0x00000000
+    LTEXT           "Select the sections where you want to add the item:", IDW_STATIC, 5, 45, 190, 12
+    LTEXT           "Name:", IDC_EXP1, 5, 80, 30, 10
+    LTEXT           "Flags:", IDC_EXP2, 5, 100, 30, 10
+    CONTROL         "", IDC_NAME, "Edit", 0x50810080, 30, 80, 100, 12, 0x00000000
+    CONTROL         "", IDC_FLAGS, "Edit", 0x50810080, 30, 100, 100, 12, 0x00000000
+    CTEXT           "__________________________________________________________", IDC_LINE, 0, 75, 200, 10, WS_DISABLED
+    GROUPBOX        "", IDW_STATIC, 40, 0, 155, 35
+    PUSHBUTTON      "&OK", IDOK, 110, 85, 40, 14
+    PUSHBUTTON      "&Cancel", IDCANCEL, 155, 85, 40, 14
+    PUSHBUTTON      "\xAB", IDEXP, 5, 85, 14, 14
+END
+
+IDD_UPDATE DIALOG DISCARDABLE 0, 0, 150, 100
+STYLE DS_MODALFRAME | DS_CENTER | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Check for update"
+FONT 8, "Verdana"
+BEGIN
+	LTEXT           "Checking if a newer version of Startup Manager is available...", IDW_STATIC, 5, 5, 140, 20
+	LTEXT           "Your version is:", IDW_STATIC, 5, 30, 70, 12
+	CONTROL         "0.0.0.0", IDC_CURRENT, "Static", SS_LEFT, 75, 30, 50, 12
+	LTEXT           "Latest version is:", IDW_STATIC, 5, 42, 70, 12
+	CONTROL         "0.0.0.0", IDC_LATEST, "Static", SS_LEFT, 75, 42, 50, 14
+	CONTROL         "", IDC_INFORMATION, "Static", SS_LEFT | SS_NOTIFY, 5, 60, 140, 20
+	PUSHBUTTON      "&OK", IDOK, 55, 85, 40, 14
+END
+
+IDD_GENERALSETTINGS DIALOGEX 0, 0, 220, 85
+STYLE WS_CHILD | WS_VISIBLE | WS_BORDER
+FONT 8, "Verdana"
+BEGIN
+	GROUPBOX		"Window", IDW_STATIC, 5, 10, 180, 40
+	CONTROL			"&Remember window size and position", IDC_SIZEPOS, "Button", BS_AUTOCHECKBOX | WS_TABSTOP, 15, 22, 165, 12
+	CONTROL			"&Store sort information (column and direction)", IDC_SORTINFO, "Button", BS_AUTOCHECKBOX | WS_TABSTOP, 15, 34, 165, 12
+	CONTROL			"&Automatically check for updates", IDC_AUPDATE, "Button", BS_AUTOCHECKBOX | WS_TABSTOP, 5, 85, 190, 12
+END
+
+IDD_ADVANCEDSETTINGS DIALOGEX 0, 0, 220, 85
+STYLE WS_CHILD | WS_VISIBLE | WS_BORDER
+FONT 8, "Verdana"
+BEGIN
+	GROUPBOX		"Store disabled items in:", IDW_STATIC, 5, 10, 180, 40
+	CONTROL         "&Msconfig key (msconfig compatible)", IDC_DMSCONFIG, "Button", BS_AUTORADIOBUTTON | WS_GROUP | WS_TABSTOP, 15, 22, 165, 10
+	CONTROL         "&Startup Manager key", IDC_DPRIVATE, "Button", BS_AUTORADIOBUTTON | WS_TABSTOP, 15, 34, 165, 10
+	GROUPBOX		"Exported XML", IDW_STATIC, 5, 55, 180, 40
+	CONTROL			"&Use XML stylesheet (for exported XML)", IDC_USEXSL, "Button", BS_AUTOCHECKBOX | WS_TABSTOP, 15, 67, 165, 12
+END
+
+IDW_MAIN ACCELERATORS DISCARDABLE
+BEGIN
+	"A",            IDM_FILE_ADD,            VIRTKEY, CONTROL, NOINVERT
+    "C",            IDM_FILE_MSCONFIG,       VIRTKEY, ALT, NOINVERT
+    "E",            IDM_FILE_REGEDIT,        VIRTKEY, ALT, NOINVERT
+	"D",            IDM_EDIT_DELETE,         VIRTKEY, CONTROL, NOINVERT
+	"N",            IDM_EDIT_RENAME,         VIRTKEY, CONTROL, NOINVERT
+	"R",			IDM_EDIT_RUN,			 VIRTKEY, CONTROL, NOINVERT
+	"P",            IDM_EDIT_PROPERTIES,     VIRTKEY, CONTROL, NOINVERT
+	"T",            IDW_VIEW_TOOLBAR,        VIRTKEY, CONTROL, NOINVERT
+	"S",            IDW_VIEW_STATUSBAR,      VIRTKEY, CONTROL, NOINVERT
+	"F",            IDM_VIEW_REFRESH,        VIRTKEY, CONTROL, NOINVERT
+	VK_F5,          IDM_VIEW_REFRESH,        VIRTKEY, NOINVERT
+	VK_F1,          IDM_HELP_CONTENTS,       VIRTKEY, NOINVERT
+	VK_TAB,         IDM_EDIT_TAB,            VIRTKEY, NOINVERT
+	VK_TAB,         IDM_EDIT_TAB,            VIRTKEY, SHIFT, NOINVERT
+	VK_APPS,        IDM_EDIT_APP,            VIRTKEY, NOINVERT
+END
+
+STRINGTABLE DISCARDABLE
+BEGIN
+    IDW_MAIN                    "Startup Manager 2.4.2"
+END
+
+//toolbar button tooltips
+STRINGTABLE DISCARDABLE
+BEGIN
+    IDM_FILE_ADD                "Add an item"
+    IDM_EDIT_DELETE             "Remove the selected item"
+    IDM_EDIT_RENAME             "Rename the selected item"
+	IDM_EDIT_RUN				"Run the selected item"
+	IDM_EDIT_PROPERTIES         "Show properties of the selected item"
+    IDM_VIEW_REFRESH            "Refresh the list"
+    IDM_HELP_CONTENTS           "Contents"
+    IDM_HELP_ABOUT              "About Startup Manager"
+END
+
+//toolbar button text
+STRINGTABLE DISCARDABLE
+BEGIN
+	STR_FILE_ADD				"Add"
+	STR_EDIT_DELETE				"Delete"
+	STR_EDIT_RENAME				"Rename"
+	STR_EDIT_RUN				"Run"
+	STR_EDIT_PROPERTIES			"Properties"
+	STR_VIEW_REFRESH			"Refresh"
+	STR_HELP_CONTENTS			"Help"
+	STR_HELP_ABOUT				"About"
+END
+
+//tooltips in dialogs and views
+STRINGTABLE DISCARDABLE
+BEGIN
+	DLGADD_TT_IDOK				"Add the defined item to the boot sections"
+	DLGADD_TT_IDBROWSE			"Look for an application on the computer"
+	DLGADD_TT_IDC_SECTION		"Choose the section where you want to add the item"
+	DLGADD_TT_IDC_NAME			"ex. myapp | ignored in case of win.ini"
+	DLGADD_TT_IDC_PATH			"ex. c:\\apps\\myapp.exe | required"
+	DLGADD_TT_IDC_FLAGS			"extra parameters"
+	DLGBTORDERC_TT_IDC_NAME		"Enter a name for the batch-file"
+	DLGBTORDERC_TT_IDC_SECTION	"Choose the section where you want to add the batch-file"
+	DLGBTORDERA_TT_IDOK			"Add defined item to boot order file"
+	DLGBTORDERA_TT_IDBROWSE		"Look for an application on the computer"
+	DLGBTORDERA_TT_IDC_PATH		"ex. c:\\apps\\myapp.exe | required"
+	DLGBTORDERA_TT_IDC_FLAGS	"extra parameters | optional"
+	DLGBTORDER_TT_IDUP			"Move the item one position up"
+	DLGBTORDER_TT_IDDOWN		"Move the item one position down"
+	DLGBTORDER_TT_IDADD			"Add an item to the batch-file"
+	DLGBTORDER_TT_IDDELETE		"Remove an item from the batch-file"
+	DLGBTORDER_TT_IDNEW			"Create a new batch-file"
+	DLGBTORDER_TT_IDOPEN		"Open an existing batch-file"
+	DLGBTORDER_TT_IDOK			"Save the changes"
+	DLGBTORDER_TT_IDCANCEL		"Close the dialog without saving"
+	DLGBTORDER_TT_IDC_CHWAIT	"Wait for an item to execute until the previous ended"
+	DLGDROP_TT_IDOK				"Add the defined item to the boot sections"
+	DLGDROP_TT_IDC_SECTION		"Choose the section where you want to add the item"
+	DLGDROP_TT_IDEXP			"Expand/contract the dialog"
+	DLGDROP_TT_IDC_NAME			"ex. myapp | ignored in case of win.ini"
+	DLGDROP_TT_IDC_FLAGS		"extra parameters | only used with registry"
+	DLGLOG_TT_IDCLEAR			"Clear log file"
+	DLGPROP_TT_IDOK				"Close the dialog"
+	DLGPROP_TT_IDC_FILENAME		"Open file directory"
+	DLGPROP_TT_IDC_GOOGLE		"Search information on google"
+	DLGSETTINGS_TT_IDOK			"Apply settings and close dialog"
+	DLGSETTINGS_TT_IDAPPLY		"Apply settings"
+	DLGSETTINGS_TT_IDCANCEL		"Close dialog"
+	DLGUPDATE_TT_IDC_INFO		"Download the latest version of Startup Manager"
+	DLGRENAME_TT_IDOK			"Rename the selected item"
+	DLGRENAME_TT_IDC_NEWNAME	"Enter the new name for the selected item here"
+END
+
+//information/warning/error messages
+STRINGTABLE DISCARDABLE
+BEGIN
+	MSG_INFORMATION				"Information"
+	MSG_WARNING					"Warning"
+	MSG_ERROR					"Error"
+	MSG_QUESTION				"Question"
+	DLGADD_MSG_SPACES			"It is not allowed to add an address that contains spaces to the selected section"
+	DLGADD_MSG_EMPTYFIELD		"One of the required fields seems to be empty...\nTo add a new item to the startup \
+								sections, you\nat least need to specify a section and a path."
+	DLGADD_MSG_FAILED			"Couldn't add item"
+	DLGADD_MSG_EMPTYFIELDBHO	"One of the required fields seems to be empty...\nTo create a new Browser Helper \
+								Object, you\nneed to specify a section and a CLSID."
+	DLGADD_MSG_FAILEDBHO		"Couldn't create Browser Help Object, most likely you\nentered an invalid CLSID."
+	DLGBTORDERA_MSG_EMPTYFIELD	"You should specify a path in order to add an item"
+	DLGBTORDER_MSG_NOBATCH		"Unable to read the batch-file."
+	DLGBTORDER_MSG_ADDFAILED	"Couldn't add order file"
+	DLGBTORDER_MSG_BATCH		"Unable to create batch-file."
+	DLGBTORDER_MSG_EMPTY		"No items to add to batch-file."
+	DLGBTORDER_MSG_QADD			"This file is not in the start sections, do you want to add it now?"
+	DLGDROP_MSG_SPACES			"It is not allowed to add an address that contains spaces to the selected section"
+	DLGDROP_MSG_FAILED			"Couldn't add item"
+	DLGSETTINGS_MSG_PRIVATE		"You will no longer be able to enable items you disabled\nwith msconfig and the \
+								other way around."
+	DLGUPDATE_MSG_FAILED		"Unable to check for update"
+	DLGRENAME_MSG_FAILED		"Couldn't rename item"
+	DLGRENAME_MSG_EMPTYFIELD	"No new name specified"
+	MSG_DELETESYSFILE			" is a system file and should not be removed.\nRemove anyway?"
+	MSG_DELETEFILE				"Do you really want to remove this item\nfrom the startup sections?"
+	MSG_DELETEFAILED			"Couldn't delete item"
+	MSG_HELPMISSING				"Html Help file not found"
+	MSG_DISABLESYSFILE			"The item you're trying to disable is a system file and should not be disabled.\
+								\nDisable item anyway?"
+	MSG_DISABLECORRUPTED		"This item is corrupted and can't be enabled/disabled."
+	MSG_DISABLEFAILED			"Couldn't enable/disable selected item"
+END
+
+//other strings
+STRINGTABLE DISCARDABLE
+BEGIN
+	DLGBTORDER_STR_LVCOLUMN		"Batch-file content"
+	DLGDROP_STR_INFO1			"You are about to add\n"				// in between these two string
+	DLGDROP_STR_INFO2			"\nto the windows startup sections!"	// there will be a file name
+	DLGLOG_STR_COL1				"Item"
+	DLGLOG_STR_COL2				"Operation"
+	DLGLOG_STR_COL3				"User"
+	DLGLOG_STR_COL4				"Section"
+	DLGLOG_STR_COL5				"Date"
+	DLGLOG_STR_COL6				"Time"
+	DLGLOG_STR_COUNT			"item(s)"
+	DLGLOG_STR_EMPTY			"NO ITEMS TO SHOW..."
+	DLGPROP_STR_TITLE			"Properties :: "
+	DLGUPDATE_STR_CHECKING		"Checking for update..."
+	DLGUPDATE_STR_YES			"A newer version of Startup Manager is available, click here to download it..."
+	DLGUPDATE_STR_NO			"You already have the latest version."
+	DLGRENAME_STR_TITLE			"Rename "
+	STR_TITLE					"running on "		// will be: Startup Manager x.x :: running on windows x
+	STR_DELETE					"delete "			// will be: delete itemname...
+	STR_COL1					"Item"
+	STR_COL2					"Section"
+	STR_COL3					"Flags"
+	STR_COL4					"Filepath"
+	STR_CONTEXT1				"&Properties\tCtrl+P"
+	STR_CONTEXT2				"Re&name\tCtrl+N"
+	STR_CONTEXT3				"&Delete\tCtrl+D"
+	STR_CONTEXT4				"&Add item\tCtrl+A"
+	STR_CONTEXT5				"&Boot order"
+	STR_CONTEXT6				"Re&fresh\tCtrl+F"
+	STR_CONTEXT7				"&Run\tCtrl+R"
+	STR_CONTEXT8				"&File properties"
+	STR_DISABLED				"Disabled"
+	STR_TREETITLE				"Start Sections"
+	STR_UPDATE1					"Startup Manager version "	//will be: Startup Manager version x.x.x.x is available
+	STR_UPDATE2					" is available now,\ndo you want to download it?"	//now, do you want to download it?
+	STR_UPDATETITLE				"New version available!"
+	SETTINGSDLG_STR_TITLE		"Settings"
+	SETTINGSDLG_STR_TITLEP1		"General"
+	SETTINGSDLG_STR_TITLEP2		"Advanced"
+END
+
+1 VERSIONINFO
+FILEVERSION 2,4,2,2915
+PRODUCTVERSION 2,4,2,2915
+FILETYPE VFT_APP
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "040904E4"
+        BEGIN
+            VALUE "Comments", "This is a program to manage the programs that boot on windows startup.\0"
+            VALUE "CompanyName", "Glenn Van Loon\0"
+            VALUE "FileVersion", "2.4.2.2915"
+            VALUE "FileDescription", "Manage WinStartup\0"
+            VALUE "InternalName", "Startup Manager\0"
+            VALUE "LegalCopyright", "Copyright \xA9 2004-2008, Glenn Van Loon\0"
+            VALUE "OriginalFilename", "Startup Manager.EXE\0"
+            VALUE "ProductName", "Startup Manager 2.4.2\0"
+            VALUE "ProductVersion", "2.4.2\0"
+			VALUE "Website", "http://startupmanager.org/\nhttp://st-m.sf.net/\nhttp://sf.net/projects/st-m/\0"
+            VALUE "License", "GNU General Public License\0"
+        END
+    END
+
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x0409, 1252
+    END
+END

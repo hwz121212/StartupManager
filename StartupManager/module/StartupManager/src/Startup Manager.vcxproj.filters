@@ -1,0 +1,397 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Source Files\Boot">
+      <UniqueIdentifier>{9e379481-e31b-4d0d-a809-823efc4daf22}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Types">
+      <UniqueIdentifier>{1df3df56-d686-439b-9c3e-43ff48c20007}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Header Files\Boot">
+      <UniqueIdentifier>{99eace98-8a28-4381-884c-40ab1c8027cb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Types">
+      <UniqueIdentifier>{5b027678-6ef7-40cd-be26-fd9829cd9605}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx</Extensions>
+    </Filter>
+    <Filter Include="Win32++">
+      <UniqueIdentifier>{e57ac3f5-a4c1-4535-bf8f-61a5150e5d3a}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="AboutDlg.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AddDlg.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BrowseEdit.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BtCoreExporter.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BtOrderDlg.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CImage.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DropDlg.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="FrameApp.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="HotImage.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="HyperLink.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LeftView.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ListView.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LogDlg.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Logoff.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MainFrm.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MainView.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="PropertiesDlg.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="RenameDlg.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="RightView.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SettingsDlg.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TitleTip.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ToolTip.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TreeCtrl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="UpdateDlg.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="boot\BtBHO.cpp">
+      <Filter>Source Files\Boot</Filter>
+    </ClCompile>
+    <ClCompile Include="boot\BtCore.cpp">
+      <Filter>Source Files\Boot</Filter>
+    </ClCompile>
+    <ClCompile Include="boot\BtFolder.cpp">
+      <Filter>Source Files\Boot</Filter>
+    </ClCompile>
+    <ClCompile Include="boot\BtReg.cpp">
+      <Filter>Source Files\Boot</Filter>
+    </ClCompile>
+    <ClCompile Include="boot\BtSection.cpp">
+      <Filter>Source Files\Boot</Filter>
+    </ClCompile>
+    <ClCompile Include="boot\BtWinini.cpp">
+      <Filter>Source Files\Boot</Filter>
+    </ClCompile>
+    <ClCompile Include="boot\BtWinLogon.cpp">
+      <Filter>Source Files\Boot</Filter>
+    </ClCompile>
+    <ClCompile Include="boot\cLibraryInfo.cpp">
+      <Filter>Source Files\Boot</Filter>
+    </ClCompile>
+    <ClCompile Include="boot\File.cpp">
+      <Filter>Source Files\Boot</Filter>
+    </ClCompile>
+    <ClCompile Include="boot\GList.cpp">
+      <Filter>Source Files\Boot</Filter>
+    </ClCompile>
+    <ClCompile Include="boot\RegKey.cpp">
+      <Filter>Source Files\Boot</Filter>
+    </ClCompile>
+    <ClCompile Include="boot\ShortCut.cpp">
+      <Filter>Source Files\Boot</Filter>
+    </ClCompile>
+    <ClCompile Include="boot\WinTools.cpp">
+      <Filter>Source Files\Boot</Filter>
+    </ClCompile>
+    <ClCompile Include="types\tstring.cpp">
+      <Filter>Source Files\Types</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="AboutDlg.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AddDlg.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BrowseEdit.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BtCoreExporter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BtOrderDlg.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CImage.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DropDlg.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="FrameApp.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="HotImage.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="HyperLink.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LeftView.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ListView.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LogDlg.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Logoff.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MainFrm.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MainView.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PropertiesDlg.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="RenameDlg.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="RightView.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SettingsDlg.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TitleTip.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ToolTip.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TreeCtrl.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="UpdateDlg.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="boot\BtBHO.h">
+      <Filter>Header Files\Boot</Filter>
+    </ClInclude>
+    <ClInclude Include="boot\BtCore.h">
+      <Filter>Header Files\Boot</Filter>
+    </ClInclude>
+    <ClInclude Include="boot\BtFolder.h">
+      <Filter>Header Files\Boot</Filter>
+    </ClInclude>
+    <ClInclude Include="boot\BtReg.h">
+      <Filter>Header Files\Boot</Filter>
+    </ClInclude>
+    <ClInclude Include="boot\BtSection.h">
+      <Filter>Header Files\Boot</Filter>
+    </ClInclude>
+    <ClInclude Include="boot\BtWinini.h">
+      <Filter>Header Files\Boot</Filter>
+    </ClInclude>
+    <ClInclude Include="boot\BtWinLogon.h">
+      <Filter>Header Files\Boot</Filter>
+    </ClInclude>
+    <ClInclude Include="boot\cLibraryInfo.h">
+      <Filter>Header Files\Boot</Filter>
+    </ClInclude>
+    <ClInclude Include="boot\File.h">
+      <Filter>Header Files\Boot</Filter>
+    </ClInclude>
+    <ClInclude Include="boot\GList.h">
+      <Filter>Header Files\Boot</Filter>
+    </ClInclude>
+    <ClInclude Include="boot\RegKey.h">
+      <Filter>Header Files\Boot</Filter>
+    </ClInclude>
+    <ClInclude Include="boot\ShortCut.h">
+      <Filter>Header Files\Boot</Filter>
+    </ClInclude>
+    <ClInclude Include="boot\WinTools.h">
+      <Filter>Header Files\Boot</Filter>
+    </ClInclude>
+    <ClInclude Include="types\tfstream.h">
+      <Filter>Header Files\Types</Filter>
+    </ClInclude>
+    <ClInclude Include="types\tstring.h">
+      <Filter>Header Files\Types</Filter>
+    </ClInclude>
+    <ClInclude Include="types\utf16fstream.h">
+      <Filter>Header Files\Types</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Win32++\Default_Resource.h">
+      <Filter>Win32++</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Win32++\Dialog.h">
+      <Filter>Win32++</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Win32++\Frame.h">
+      <Filter>Win32++</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Win32++\GDI.h">
+      <Filter>Win32++</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Win32++\PropertySheet.h">
+      <Filter>Win32++</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Win32++\Rebar.h">
+      <Filter>Win32++</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Win32++\Splitter.h">
+      <Filter>Win32++</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Win32++\Statusbar.h">
+      <Filter>Win32++</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Win32++\Toolbar.h">
+      <Filter>Win32++</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Win32++\WinCore.h">
+      <Filter>Win32++</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="res\about.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\backgrnd.bmp">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\delete.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\downarrow.bmp">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\help.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\hybernate.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\invalid.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\log.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\logoff.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\new.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\project-support.jpg">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\properties.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\refresh.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\rename.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\restart.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\run.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\settings.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\shutdown.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\st-m_logo.gif">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\Startup_Manager.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\Toolbar.bmp">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\toolbar_d.bmp">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\toolbar_h.bmp">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\toolbar_n.bmp">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\treeview.bmp">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\uparrow.bmp">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\update.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="res\website.ico">
+      <Filter>Resource Files</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="rsrc.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+</Project>
